@@ -1,3 +1,4 @@
+import { VersionFormComponent } from './version-form/version-form.component';
 import { VersionDetailComponent } from './version-detail/version-detail.component';
 import { VersionListComponent } from './version-list/version-list.component';
 import { VersionsComponent } from './versions.component';
@@ -15,9 +16,14 @@ const VERSIONS_ROUTES: Routes = [
         component: VersionListComponent
       },
       {
+        path: 'new',
+        component: VersionFormComponent
+      },
+      {
         path: ':id',
         component: VersionDetailComponent
       }
+
     ]
   }
 ]

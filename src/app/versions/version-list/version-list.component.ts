@@ -1,3 +1,5 @@
+import { PbVersion } from './../../models/pb-version';
+import { VersionsService } from './../versions.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VersionListComponent implements OnInit {
 
-  constructor() { }
+  versions: PbVersion[] = [];
+
+  constructor(private service: VersionsService) { }
 
   ngOnInit() {
+    this.service.getVersions()
+      .subscribe(versions => {
+        this.versions = versions;
+      })
   }
 
 }
