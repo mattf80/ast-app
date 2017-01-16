@@ -1,7 +1,10 @@
+import { HomeModule } from './home/home.module';
+import { IssuanceModule } from './issuance/issuance.module';
 import { InMemDataService } from './data/InMemDataService';
 import { AppRoutingModule } from './app-routing.module';
 
 import { VersionsModule } from './versions/versions.module';
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -23,6 +26,8 @@ import { PageNotFoundComponent } from './not-found/not-found.component';
     HttpModule,
     InMemoryWebApiModule.forRoot(InMemDataService, {delay: 500}),
     VersionsModule,
+    IssuanceModule,
+    HomeModule,
     AppRoutingModule
 
   ],

@@ -1,6 +1,14 @@
-<h1>
-  {{title}}
-</h1>
+<nav class="navbar navbar-toggleable navbar-fixed-top navbar-inverse bg-inverse">
+    <div class="collapse navbar-collapse">
+        <a class="navbar-brand navbar-inverse">PBC</a>
+        <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link" routerLink="/">Home</a></li>
+            <li class="nav-item"><a class="nav-link" routerLink="versions">Versions</a></li>
+            <li class="nav-item"><a class="nav-link" routerLink="issuances">Issue PB Contingency</a></li>
+            <li class="nav-item"><a class="nav-link" routerLink="admin">Admin</a></li>
+        </ul>
+    </div>
+</nav>
 <div class="container">
   <router-outlet></router-outlet>
 </div>
