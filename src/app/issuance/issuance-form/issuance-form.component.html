@@ -1,0 +1,51 @@
+<div class="row">
+  <div class="col-md-6 offset-3">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">Issue PB contingency</h4>
+      </div>
+
+      <div class="card-block">
+        <form novalidate [formGroup]="issuanceForm" (ngSubmit)="save()">
+          <div class="form-group" [ngClass]="{'has-error': (issuanceForm.get('centreNo').touched || issuanceForm.get('centreNo').dirty)}">
+            <label for="centreNoId">Centre No</label>
+            <input type="text" class="form-control" id="centreNoId" formControlName="centreNo">
+          </div>
+
+          <div class="form-group">
+            <label for="examId">Exam</label>
+            <select id="examId" class="form-control" formControlName="exam" (change)="onExamChange($event.target.value)">
+              <option *ngFor="let exam of exams" [ngValue]="exam">{{exam.name}}</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="examComponentId">Component</label>
+            <select id="examComponentId" class="form-control" formControlName="examComponent">
+              <option *ngFor="let comp of examComponents" [ngValue]="comp">{{comp.name}}</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="pbVersionId">PB Version</label>
+            <select id="pbVersionId" class="form-control" formControlName="pbVersion">
+              <option *ngFor="let pbv of pbVersions" [ngValue]="pbv">{{pbv.exam}} - {{pbv.examComponent}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <span>
+              <button class="btn btn-primary" type="submit" [disabled]="!issuanceForm.valid">
+                Save
+              </button>
+            </span>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br>Dirty: {{issuanceForm.dirty}}
+<br>Touched: {{issuanceForm.touched}}
+<br>Valid: {{issuanceForm.valid}}
+<br>Value: {{issuanceForm.value | json}}

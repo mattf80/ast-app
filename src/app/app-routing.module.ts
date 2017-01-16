@@ -1,3 +1,4 @@
+import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './not-found/not-found.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -6,8 +7,7 @@ import { RouterModule, Routes } from '@angular/router';
 const APP_ROUTES: Routes = [
   {
     path: '',
-    redirectTo: '/versions',
-    pathMatch: 'full'
+    component: HomeComponent
   },
   {
      path: '**', component: PageNotFoundComponent 
