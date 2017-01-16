@@ -17,6 +17,7 @@ export class VersionListComponent implements OnInit {
     this.service.getVersions()
       .subscribe(versions => {
         this.versions = versions;
+        console.log(this.versions);
       })
   }
 

@@ -10,16 +10,24 @@
           <th>#</th>
           <th>Exam</th>
           <th>Component</th>
-          <th>Is Current?</th>
+          <th>Version</th>
+          <th>Status</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let version of versions">
           <th scope="row">{{version.id}}</th>
-          <td>{{version.exam}}</td>
-          <td>{{version.examComponent}}</td>
+          <td>{{version.exam.name}}</td>
+          <td>{{version.examComponent.name}}</td>
+          <td>{{version.name}}</td>
+          <td>{{version.isCurrent ? 'Current' : 'Expired'}}</td>
           <td>
-            <input type="checkbox" [checked]="version.isCurrent" disabled>
+            <div class="row">
+              
+              <button type="button" class="btn btn-sm btn-success"><i class="fa fa-edit"></i></button>
+              
+            </div>
           </td>
         </tr>
       </tbody>

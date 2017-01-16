@@ -1,4 +1,9 @@
+import { Exam, ExamComponent } from './../../models/exam';
+import { VersionsService } from './../versions.service';
+import { PbVersion } from './../../models/pb-version';
 import { Component, OnInit } from '@angular/core';
+import { Validators, FormGroup, FormArray, FormBuilder } from '@angular/forms';
+
 
 @Component({
   selector: 'app-version-form',
@@ -7,9 +12,42 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VersionFormComponent implements OnInit {
 
-  constructor() { }
+  public versionForm: FormGroup;
+  public exams: Exam[];
+  public examComponents: ExamComponent[];
+
+  constructor(
+    private fb: FormBuilder,
+    private service: VersionsService) { }
 
   ngOnInit() {
+    this.initForm();
+    this.getExamsAndComponents();
+  }
+
+  getExamsAndComponents() {
+    this.service.getReferenceData()
+      .subscribe(data => {
+        this.exams = data[0];
+        this.examComponents = data[1];
+      });
+  }
+
+  initForm() {
+    this.versionForm = this.fb.group({
+      exam: ['', Validators.required],
+      examComponent: ['', Validators.required],
+      name: ['', Validators.required],
+      isCurrent: [true]
+    });
+  }
+
+  save(model: PbVersion) {
+    model.dateAdded = new Date().toUTCString();
+    this.service.addVersion(model)
+      .subscribe(data => {
+        console.log(data);
+      })
   }
 
 }

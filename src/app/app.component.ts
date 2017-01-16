@@ -9,5 +9,5 @@ import './rxjs-operators';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app works!';
+  title = 'Paper-based contingency tracker';
 }

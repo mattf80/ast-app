@@ -1,3 +1,55 @@
-<p>
-  version-form works!
-</p>
+<div class="col-sm-6 offset-3">
+
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title">New version details</h4>
+    </div>
+    <div class="card-block">
+
+      <form novalidate [formGroup]="versionForm" (ngSubmit)="save(versionForm.value)">
+
+        <div class="form-group row">
+          <label for="examSelect" class="col-sm-4 col-form-label">Exam</label>
+          <div class="col-sm-8">
+            <select name="examSelect" id="examSelect" class="form-control" formControlName="exam">
+          <option value="default" default>--Select--</option>
+          <option *ngFor="let exam of exams" [ngValue]="exam" >{{exam.name}}</option>
+        </select>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="componentSelect" class="col-sm-4 col-form-label">Component</label>
+          <div class="col-sm-8">
+            <select name="componentSelect" id="componentSelect" class="form-control" formControlName="examComponent">
+          <option value="default">--Select--</option>
+          <option *ngFor="let comp of examComponents" [ngValue]="comp">{{comp.name}}</option>
+        </select>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="versionName" class="col-sm-4 col-form-label">Version Name</label>
+          <div class="col-sm-8">
+            <input id="versionName" name="versionName" type="text" class="form-control" formControlName="name">
+          </div>
+        </div>
+
+
+        <div class="checkbox col-sm-8 offset-4 form-group">
+          <label>
+            <input class="form-check-input" type="checkbox" formControlName="isCurrent">
+              Is current?
+          </label>
+        </div>
+
+        <div class="pull-right">
+          <button type="submit" class="btn btn-primary" [disabled]="!versionForm.valid">Save</button>
+        </div>
+
+
+
+      </form>
+    </div>
+  </div>
+</div>

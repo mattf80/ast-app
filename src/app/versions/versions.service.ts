@@ -1,20 +1,44 @@
+import { Exam, ExamComponent } from './../models/exam';
 import { PbVersion } from './../models/pb-version';
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
-import { Observable }     from 'rxjs/Observable';
+import { Http, Response, Headers } from '@angular/http';
+import { Observable }     from 'rxjs/Rx';
 
 
 @Injectable()
 export class VersionsService {
 
-  private url: string = 'app/versions';
+  private versionsUrl: string = 'app/versions';
+  private examsUrl: string = 'app/exams';
+  private examComponentUrl: string = 'app/examComponents';
+
+  private headers = new Headers({ 'Content-Type': 'application/json' });
 
   constructor(private http:Http) { }
 
     getVersions (): Observable<PbVersion[]> {
-    return this.http.get(this.url)
+    return this.http.get(this.versionsUrl)
                     .map(this.extractData)
                     .catch(this.handleError);
+  }
+
+  getExams(): Observable<Exam[]>{
+    return this.http.get(this.examsUrl)
+                    .map(this.extractData)
+                    .catch(this.handleError);
+  }
+
+    getReferenceData() {
+    return Observable.forkJoin(
+      this.http.get(this.examsUrl).map(response => response.json().data as Exam[]),
+      this.http.get(this.examComponentUrl).map(response => response.json().data as ExamComponent[])
+    );
+  }
+
+  addVersion(version: PbVersion): Observable<PbVersion>{
+    return this.http.post(this.versionsUrl, JSON.stringify({version}), {headers: this.headers})
+      .map(res => res.json().data.version as PbVersion)
+      .catch(this.handleError)
   }
 
    private extractData(res: Response) {
