@@ -22,7 +22,24 @@ export class VersionFormComponent implements OnInit {
 
   ngOnInit() {
     this.initForm();
-    this.getExamsAndComponents();
+    //this.getExamsAndComponents();
+    this.getExams();
+  }
+
+  getExams() {
+    this.service.getExams()
+      .subscribe(data => {
+        this.exams = data;
+      })
+  }
+
+  onExamChange(){
+    let examId = this.versionForm.get('exam').value['id'];
+    this.service.getComponentsForExam(examId)
+      .subscribe(data => {
+        this.examComponents = data;
+        console.log(this.examComponents);
+      }) 
   }
 
   getExamsAndComponents() {

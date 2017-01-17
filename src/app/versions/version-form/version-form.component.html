@@ -11,7 +11,7 @@
         <div class="form-group row">
           <label for="examSelect" class="col-sm-4 col-form-label">Exam</label>
           <div class="col-sm-8">
-            <select name="examSelect" id="examSelect" class="form-control" formControlName="exam">
+            <select name="examSelect" id="examSelect" class="form-control" formControlName="exam" (change)="onExamChange($event.target.value)">
           <option value="default" default>--Select--</option>
           <option *ngFor="let exam of exams" [ngValue]="exam" >{{exam.name}}</option>
         </select>
@@ -53,3 +53,5 @@
     </div>
   </div>
 </div>
+
+{{versionForm.value | json}}

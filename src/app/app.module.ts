@@ -24,7 +24,7 @@ import { PageNotFoundComponent } from './not-found/not-found.component';
     BrowserModule,
     FormsModule,
     HttpModule,
-    InMemoryWebApiModule.forRoot(InMemDataService, {delay: 500}),
+    //InMemoryWebApiModule.forRoot(InMemDataService, {delay: 500}),
     VersionsModule,
     IssuanceModule,
     HomeModule,

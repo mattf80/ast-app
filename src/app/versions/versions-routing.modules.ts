@@ -20,7 +20,7 @@ const VERSIONS_ROUTES: Routes = [
         component: VersionFormComponent
       },
       {
-        path: ':id',
+        path: 'detail/:id',
         component: VersionDetailComponent
       }
 

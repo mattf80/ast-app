@@ -1,3 +1,9 @@
-<p>
-  version-detail works!
-</p>
+<div class="row">
+  <div class="col-sm-6">
+    <div class="card" *ngIf="pbVersion">
+      <div class="card-header">
+        {{pbVersion.exam.name}} - {{pbVersion.examComponent.name}}
+      </div>
+    </div>
+  </div>
+</div>
