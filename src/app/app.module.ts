@@ -1,3 +1,4 @@
+import { AuthModule } from './auth/auth.module';
 import { HomeModule } from './home/home.module';
 import { IssuanceModule } from './issuance/issuance.module';
 import { InMemDataService } from './data/InMemDataService';
@@ -28,6 +29,7 @@ import { PageNotFoundComponent } from './not-found/not-found.component';
     VersionsModule,
     IssuanceModule,
     HomeModule,
+    AuthModule,
     AppRoutingModule
 
   ],
