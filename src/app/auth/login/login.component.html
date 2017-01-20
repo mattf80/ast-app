@@ -1,3 +1,7 @@
+<div class="background-image auth-background_color auth-background_image">
+
+
+
 <div>
   <form class="auth-form auth-box_background_color auth-box_text_color login">
     <div class="logo auth-log_visible">
@@ -5,9 +9,11 @@
     </div>
     <h4>Sign in</h4>
     <p>Please sign in to access the system.</p>
-    <input type="text" class="login-name" placeholder="Username">
-    <input type="password" class="login-password" placeholder="Password">
-    <button type="submit" class="btn">Sign in</button>
+    <input type="text" class="login-name" placeholder="Username" #username>
+    <input type="password" class="login-password" placeholder="Password" #password>
+    <button type="submit" class="btn" (click)="auth.login(username.value, password.value)">Sign in</button>
+    <a href="#" class="auth-link pull-right auth-box_text_color">Forgotten your password?</a>
   </form>
 </div>
 
+</div>

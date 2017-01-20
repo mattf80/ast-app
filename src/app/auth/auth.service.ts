@@ -9,7 +9,7 @@ export class AuthService {
 
 auth0 = new Auth0({
   domain: 'mattf.eu.auth0.com',
-  clientID: 'O33BqDv57D9VKAoU67QiGIs1wY3zVsMm',
+  clientID: 'bkrYGMVjHyFMYabpiOMgYL7cM3Lf10SS',
   responseType: 'token',
   callbackURL: 'http://localhost:4200/issuances',
 });
@@ -28,7 +28,7 @@ auth0 = new Auth0({
 
   public login(username, password) {
     this.auth0.login({
-      connection: 'Username-Password-Authentication',
+      connection: 'ast-app-db',
       responseType: 'token',
       email: username,
       password: password,

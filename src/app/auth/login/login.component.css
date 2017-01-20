@@ -76,3 +76,34 @@ input, textarea, keygen, select, button {
     margin: 0em 0em 0em 0em;
     font: 13.3333px Arial;
 }
+
+.auth-background_image {
+    background-image: url('http://cdn8.openculture.com/wp-content/uploads/2015/06/15181311/blade-runner.jpg');
+    
+}
+
+.auth-background_color {
+    background-color: #000;
+}
+.background-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-position: center;
+    background-size: cover;
+}
+
+.auth-form .auth-link {
+    display: block;
+    line-height: 30px;
+    margin-right: 5px;
+}
+.auth-form a {
+    color: #FFF;
+}
+
+.auth-box_text_color {
+    color: #FFF !important;
+}
