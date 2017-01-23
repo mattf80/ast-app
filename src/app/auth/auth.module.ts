@@ -1,3 +1,4 @@
+import { Auth1 } from './auth1.service';
 import { AuthService } from './auth.service';
 import { AuthRoutingModule } from './auth-routing.module';
 import { NgModule } from '@angular/core';
@@ -12,6 +13,6 @@ import { AuthComponent } from './auth.component';
     AuthRoutingModule
   ],
   declarations: [LoginComponent, AuthComponent],
-  providers: [AuthService]
+  providers: [AuthService, Auth1]
 })
 export class AuthModule { }

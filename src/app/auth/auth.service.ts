@@ -9,17 +9,19 @@ export class AuthService {
 
 auth0 = new Auth0({
   domain: 'mattf.eu.auth0.com',
-  clientID: 'O33BqDv57D9VKAoU67QiGIs1wY3zVsMm',
+  clientID: 'bkrYGMVjHyFMYabpiOMgYL7cM3Lf10SS',
   responseType: 'token',
-  callbackURL: 'http://localhost:4200/issuances',
+  callbackURL: 'http://localhost:4200'
 });
 
   constructor(private router: Router) {
     var result = this.auth0.parseHash(window.location.hash);
+    console.log(result);
 
     if (result && result.idToken) {
       localStorage.setItem('id_token', result.idToken);
-      this.router.navigate(['/home']);
+      console.log(localStorage.getItem('id_token'));
+      this.router.navigate(['/issuances']);
     } else if (result && result.error) {
       alert('error: ' + result.error);
     }
@@ -28,7 +30,7 @@ auth0 = new Auth0({
 
   public login(username, password) {
     this.auth0.login({
-      connection: 'Username-Password-Authentication',
+      connection: 'ast-app-db',
       responseType: 'token',
       email: username,
       password: password,

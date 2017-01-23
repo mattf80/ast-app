@@ -5,9 +5,14 @@
     </div>
     <h4>Sign in</h4>
     <p>Please sign in to access the system.</p>
-    <input type="text" class="login-name" placeholder="Username">
-    <input type="password" class="login-password" placeholder="Password">
-    <button type="submit" class="btn">Sign in</button>
+    <input type="text" class="login-name" placeholder="Username" #username>
+    <input type="password" class="login-password" placeholder="Password" #password>
+    <button type="submit" class="btn" (click)="auth.login(username.value, password.value)">Sign in</button>
   </form>
+  {{auth1.authenticated()}}
+  {{auth.authenticated()}}
 </div>
 
+
+  <button class="btn btn-primary btn-margin" (click)="auth1.login()" *ngIf="!auth1.authenticated()">Log In</button>
+  <button class="btn btn-primary btn-margin" (click)="auth.logout()" *ngIf="auth.authenticated()">Log Out</button>
