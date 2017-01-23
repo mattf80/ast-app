@@ -1,3 +1,7 @@
+<div class="background-image auth-background_color auth-background_image">
+
+
+
 <div>
   <form class="auth-form auth-box_background_color auth-box_text_color login">
     <div class="logo auth-log_visible">
@@ -8,11 +12,19 @@
     <input type="text" class="login-name" placeholder="Username" #username>
     <input type="password" class="login-password" placeholder="Password" #password>
     <button type="submit" class="btn" (click)="auth.login(username.value, password.value)">Sign in</button>
+<<<<<<< HEAD
+=======
+    <a href="#" class="auth-link pull-right auth-box_text_color">Forgotten your password?</a>
+>>>>>>> c9e147080b6b15022bd00b855be3f1014839bbc3
   </form>
   {{auth1.authenticated()}}
   {{auth.authenticated()}}
 </div>
 
+<<<<<<< HEAD
 
   <button class="btn btn-primary btn-margin" (click)="auth1.login()" *ngIf="!auth1.authenticated()">Log In</button>
   <button class="btn btn-primary btn-margin" (click)="auth.logout()" *ngIf="auth.authenticated()">Log Out</button>
+=======
+</div>
+>>>>>>> c9e147080b6b15022bd00b855be3f1014839bbc3
