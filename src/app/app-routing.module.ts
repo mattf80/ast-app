@@ -7,8 +7,7 @@ import { RouterModule, Routes } from '@angular/router';
 const APP_ROUTES: Routes = [
   {
     path: '',
-    redirectTo: '/auth/login',
-    pathMatch: 'full'
+    component: HomeComponent
   },
   {
      path: '**', component: PageNotFoundComponent 

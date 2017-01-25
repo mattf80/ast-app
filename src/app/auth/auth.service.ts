@@ -1,52 +1,86 @@
 import { Injectable } from '@angular/core';
 import { tokenNotExpired } from 'angular2-jwt';
-import { Router }          from '@angular/router';
+import { Router } from '@angular/router';
 
-declare var Auth0: any;
+// Avoid name not found warnings
+declare var auth0: any;
 
 @Injectable()
 export class AuthService {
 
-auth0 = new Auth0({
-  domain: 'mattf.eu.auth0.com',
-  clientID: 'bkrYGMVjHyFMYabpiOMgYL7cM3Lf10SS',
-  responseType: 'token',
-  callbackURL: 'http://localhost:4200'
-});
+  // Configure Auth0
+  auth0 = new auth0.WebAuth({
+    domain: 'mattf.eu.auth0.com',
+    clientID: 'bkrYGMVjHyFMYabpiOMgYL7cM3Lf10SS',
+    // specify your desired callback URL
+    callbackURL: 'http://localhost:4200',
+    responseType: 'token id_token'
+  });
 
   constructor(private router: Router) {
-    var result = this.auth0.parseHash(window.location.hash);
-    console.log(result);
-
-    if (result && result.idToken) {
-      localStorage.setItem('id_token', result.idToken);
-      console.log(localStorage.getItem('id_token'));
-      this.router.navigate(['/issuances']);
-    } else if (result && result.error) {
-      alert('error: ' + result.error);
-    }
   }
 
+  public handleAuthentication(): void {
+    this.auth0.parseHash((err, authResult) => {
+      if (authResult && authResult.accessToken && authResult.idToken) {
+        window.location.hash = '';
+        localStorage.setItem('access_token', authResult.accessToken);
+        localStorage.setItem('id_token', authResult.idToken);
 
-  public login(username, password) {
-    this.auth0.login({
-      connection: 'ast-app-db',
-      responseType: 'token',
-      email: username,
-      password: password,
-    }, function(err) {
-      if (err) alert("something went wrong: " + err.message);
+      } else if (authResult && authResult.error) {
+        alert('Error: ' + authResult.error);
+      }
     });
-  };
+  }
 
-  public authenticated() {
-    // Check if there's an unexpired JWT
-    // This searches for an item in localStorage with key == 'id_token'
+  public login(username: string, password: string): void {
+    this.auth0.client.login({
+      realm: 'ast-app-db',
+      username: username,
+      password: password
+    }, (err, authResult) => {
+      if (err) {
+        alert('Error: ' + err.description);
+        return;
+      }
+      if (authResult && authResult.idToken && authResult.accessToken) {
+        this.setUser(authResult);
+        //this.router.navigate(['/']);
+      }
+    });
+  }
+
+  public signup(email, password): void {
+    this.auth0.redirect.signupAndLogin({
+      connection: 'Username-Password-Authentication',
+      email,
+      password,
+    }, function(err) {
+      if (err) {
+        alert('Error: ' + err.description);
+      }
+    });
+  }
+
+  public loginWithGoogle(): void {
+    this.auth0.authorize({
+      connection: 'google-oauth2',
+    });
+  }
+
+  public isAuthenticated(): boolean {
+    // Check whether the id_token is expired or not
     return tokenNotExpired();
   }
 
-  public logout() {
+  public logout(): void {
     // Remove token from localStorage
+    localStorage.removeItem('access_token');
     localStorage.removeItem('id_token');
+  }
+
+  private setUser(authResult): void {
+    localStorage.setItem('access_token', authResult.accessToken);
+    localStorage.setItem('id_token', authResult.idToken);
   }
 }
